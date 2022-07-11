@@ -20,7 +20,7 @@ public class Exercise2 {
     }
 
 
-        public <T extends Comparable<T>> boolean bstIguales(BST<T> a1, BST<T> a2) {
+    public <T extends Comparable<T>> boolean bstIguales(BST<T> a1, BST<T> a2) {
         if (a1.isEmpty() && a2.isEmpty())
             return true;
         else if (a1.isEmpty() || a2.isEmpty())
@@ -33,35 +33,16 @@ public class Exercise2 {
         }
     }
 
-    public <T extends Comparable<T>> boolean bstEstrictamenteBinario(BST<T> a){
-        if(a.isEmpty()){
+    private <T extends Comparable<T>> boolean bstSimilares(Node<T> nodo, Node<T> nodo2) {
+        if (nodo == null && nodo2 == null)
             return true;
-        }else{
-            if(a.root.left == null && a.root.right == null){
-                return true;
-            }else{
-                if(a.root.right == null){
-                    return bstEstrictamenteBinario(a.root.left);
-                }else{
-                    return bstEstrictamenteBinario(a.root.left) && bstEstrictamenteBinario(a.root.right);
-                }
-            }
-        }
-    }
-    public <T> boolean bstEstrictamenteBinario(Node<T> nodo){
-        if(nodo == null){
-            return true;
-        }
-        else{
-            if(nodo.left == null && nodo.right != null){
+        else if (nodo == null || nodo2 == null)
+            return false;
+        else {
+            if (nodo.data.compareTo(nodo2.data) == 0)
+                return bstSimilares(nodo.left, nodo2.left) && bstSimilares(nodo.right, nodo2.right);
+            else
                 return false;
-            }
-            else if(nodo.left != null && nodo.right == null){
-                return false;
-            }
-            else{
-                return bstEstrictamenteBinario(nodo.left) && bstEstrictamenteBinario(nodo.right);
-            }
         }
     }
 }
